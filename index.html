@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>施設区分検索</title>
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link rel="icon" href="data:image/png;base64,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">
+<style>
+  :root{
+    --bg: #FBF3E7;
+    --card: #FFFDF9;
+    --border: #E4D7C4;
+    --border-strong: #D8C6AE;
+    --text: #5B4636;
+    --text-sub: #8A7362;
+    --danger: #C0392B;
+    --home-bg: #DCE8F0;
+    --home-text: #2F5770;
+    --facility-bg: #E4EEDD;
+    --facility-text: #3F5C34;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);
+    font-family:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Hiragino Sans",sans-serif;
+    font-size:17px; -webkit-tap-highlight-color:transparent;}
+  input,select,textarea,button{font-size:16px; font-family:inherit;}
+  .screen{display:none; max-width:480px; margin:0 auto; padding:16px 16px 40px;}
+  .screen.active{display:block;}
+  h1{font-size:20px; font-weight:700; margin:8px 0 16px; text-align:center;}
+  .card{background:var(--card); border:1px solid var(--border); border-radius:16px; padding:16px; margin-bottom:14px;}
+  .center{text-align:center;}
+  .muted{color:var(--text-sub); font-size:14px;}
+  button{border:none; border-radius:12px; cursor:pointer; padding:12px 16px; font-weight:700;}
+  .btn-main{background:var(--text); color:#fff; width:100%;}
+  .btn-outline{background:#fff; border:1px solid var(--border-strong); color:var(--text); width:100%;}
+  .btn-link{background:none; color:var(--text-sub); text-decoration:underline; padding:8px;}
+
+  /* passcode */
+  #passcode-dots{display:flex; gap:12px; justify-content:center; margin:20px 0;}
+  #passcode-dots div{width:44px; height:52px; border:1px solid var(--border-strong); border-radius:10px;
+    display:flex; align-items:center; justify-content:center; font-size:26px; background:#fff;}
+  #passcode-keys{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:16px;}
+  #passcode-keys button{height:56px; font-size:22px; background:#fff; border:1px solid var(--border-strong);}
+  #passcode-error{color:var(--danger); text-align:center; min-height:20px; font-size:14px;}
+
+  /* search */
+  .search-box{display:flex; align-items:center; gap:8px; border:1px solid var(--border-strong);
+    border-radius:12px; padding:0 12px; height:48px; background:#fff; margin-bottom:16px;}
+  .search-box input{border:none; outline:none; background:transparent; flex:1; font-size:17px; color:var(--text);}
+  .result-item{border:1px solid var(--border); border-radius:12px; padding:12px 14px; margin-bottom:8px; background:#fff; cursor:pointer;}
+  .result-item .name{font-size:17px; font-weight:700;}
+  .result-item .cat{font-size:14px; color:var(--text-sub); margin-top:2px;}
+
+  .group-label{font-size:14px; color:var(--text-sub); margin:14px 0 8px;}
+  .btn-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:8px;}
+  .chip{height:56px; border-radius:10px; display:flex; align-items:center; justify-content:center;
+    text-align:center; font-size:15px; font-weight:700; line-height:1.25; cursor:pointer; padding:4px;}
+  .chip.home{background:var(--home-bg); color:var(--home-text);}
+  .chip.facility{background:var(--facility-bg); color:var(--facility-text);}
+
+  .topbar{display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;}
+  .iconbtn{background:none; color:var(--text-sub); font-size:22px; padding:4px 8px;}
+
+  /* facility detail */
+  .status-box{background:var(--bg); border-radius:12px; padding:16px; text-align:center; margin:14px 0;}
+  .status-box .label{font-size:14px; color:var(--text-sub); margin-bottom:6px;}
+  .status-box .value{color:var(--danger); font-weight:700;}
+  .section-label{font-size:14px; color:var(--text-sub); margin:14px 0 4px;}
+  .section-body{font-size:16px; line-height:1.8;}
+  .em{color:var(--danger); font-weight:700;}
+
+  label.field{display:block; margin-bottom:14px;}
+  label.field span{display:block; font-size:14px; color:var(--text-sub); margin-bottom:6px;}
+  label.field input, label.field select, label.field textarea{
+    width:100%; padding:10px 12px; border:1px solid var(--border-strong); border-radius:10px; background:#fff; color:var(--text);}
+  label.field textarea{resize:vertical; min-height:70px;}
+
+  #loading{position:fixed; inset:0; background:rgba(251,243,231,0.9); display:flex; align-items:center;
+    justify-content:center; font-size:16px; color:var(--text-sub); z-index:50;}
+  #loading.hidden{display:none;}
+</style>
+</head>
+<body>
+
+<div id="loading" class="hidden">読み込み中…</div>
+
+<!-- 画面1: パスコード -->
+<div class="screen active" id="screen-passcode">
+  <div style="padding-top:60px;">
+    <div class="center" style="font-size:40px;">🔒</div>
+    <h1>パスコードを入力</h1>
+    <div id="passcode-dots"></div>
+    <div id="passcode-error"></div>
+    <div id="passcode-keys"></div>
+    <div class="center" style="margin-top:20px;">
+      <button class="btn-link" onclick="showChangePasscode()">パスコードを変更する</button>
+    </div>
+  </div>
+</div>
+
+<!-- 画面2: 検索・区分ボタン -->
+<div class="screen" id="screen-search">
+  <div class="topbar">
+    <h1 style="margin:0;">施設区分検索</h1>
+    <button class="iconbtn" onclick="goAdd()" aria-label="施設を追加">＋</button>
+  </div>
+  <div class="search-box">
+    <span>🔍</span>
+    <input type="text" id="search-input" placeholder="施設名で検索" oninput="onSearchInput()">
+  </div>
+  <div id="search-results"></div>
+  <div id="category-groups"></div>
+</div>
+
+<!-- 画面3: 区分別一覧 -->
+<div class="screen" id="screen-category-list">
+  <div class="topbar">
+    <button class="iconbtn" onclick="goSearch()" aria-label="戻る">←戻る</button>
+  </div>
+  <h1 id="category-list-title"></h1>
+  <div id="category-list-results"></div>
+</div>
+
+<!-- 画面4: 施設詳細 -->
+<div class="screen" id="screen-detail">
+  <div class="topbar">
+    <button class="iconbtn" onclick="history.back()" aria-label="戻る">←戻る</button>
+  </div>
+  <div class="card">
+    <div id="detail-title" style="font-size:19px; font-weight:700; line-height:1.6;"></div>
+    <div class="status-box">
+      <div class="label">現在の状況</div>
+      <div class="value" id="detail-status"></div>
+    </div>
+    <div class="section-label">現在のサービス</div>
+    <div class="section-body" id="detail-service"></div>
+    <div id="detail-fillin-wrap">
+      <div class="section-label">記入すること</div>
+      <div class="section-body" id="detail-fillin"></div>
+    </div>
+    <div id="detail-memo-wrap" style="margin-top:14px;">
+      <div class="section-label">メモ</div>
+      <div class="section-body" id="detail-memo"></div>
+    </div>
+    <button class="btn-outline" id="detail-edit-btn" style="margin-top:18px;" onclick="goEdit()">✏️ 編集する</button>
+  </div>
+</div>
+
+<!-- 画面5: 追加・編集フォーム -->
+<div class="screen" id="screen-form">
+  <div class="topbar">
+    <button class="iconbtn" onclick="history.back()" aria-label="戻る">←戻る</button>
+  </div>
+  <h1 id="form-title">施設を追加</h1>
+  <div class="card">
+    <label class="field">
+      <span>施設名</span>
+      <input type="text" id="form-name">
+    </label>
+    <label class="field">
+      <span>施設区分</span>
+      <select id="form-category"></select>
+    </label>
+    <label class="field">
+      <span>メモ</span>
+      <textarea id="form-memo"></textarea>
+    </label>
+    <div id="form-error" style="color:var(--danger); font-size:14px; margin-bottom:10px;"></div>
+    <button class="btn-main" onclick="saveForm()">保存する</button>
+  </div>
+</div>
+
+<script>
+// ==== 設定 ====
+// ここに、Google Apps Scriptを「ウェブアプリ」としてデプロイした後のURLを貼り付けてください
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyJxWkp5LqIGcQ1io1Lpnu5oSzwScUp3Db0ayaRvDhjVx6JiMo8Ag4ZlDB7ZsZkCwM/exec";
+
+// ==== 状態 ====
+let PASSCODE = "";
+let categories = [];
+let facilities = [];
+let currentCategory = null;
+let currentFacilityId = null;
+let editingId = null;
+
+function showLoading(v){ document.getElementById('loading').classList.toggle('hidden', !v); }
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// ==== パスコード画面 ====
+let pinInput = "";
+function renderPasscodeDots(){
+  const wrap = document.getElementById('passcode-dots');
+  wrap.innerHTML = "";
+  for(let i=0;i<4;i++){
+    const d = document.createElement('div');
+    d.textContent = i < pinInput.length ? "●" : "";
+    wrap.appendChild(d);
+  }
+}
+function renderPasscodeKeys(){
+  const wrap = document.getElementById('passcode-keys');
+  wrap.innerHTML = "";
+  const keys = ["1","2","3","4","5","6","7","8","9","","0","⌫"];
+  keys.forEach(k=>{
+    const b = document.createElement('button');
+    b.textContent = k;
+    if(k === ""){ b.style.visibility = "hidden"; }
+    b.onclick = ()=> onKeyPress(k);
+    wrap.appendChild(b);
+  });
+}
+function onKeyPress(k){
+  if(k === "⌫"){ pinInput = pinInput.slice(0,-1); }
+  else if(k !== "" && pinInput.length < 4){ pinInput += k; }
+  renderPasscodeDots();
+  document.getElementById('passcode-error').textContent = "";
+  if(pinInput.length === 4){ submitPasscode(); }
+}
+function submitPasscode(){
+  showLoading(true);
+  fetch(APPS_SCRIPT_URL + "?passcode=" + encodeURIComponent(pinInput))
+    .then(r=>r.json())
+    .then(res=>{
+      showLoading(false);
+      if(!res.ok){
+        document.getElementById('passcode-error').textContent = "パスコードが違います";
+        pinInput = "";
+        renderPasscodeDots();
+        return;
+      }
+      PASSCODE = pinInput;
+      categories = res.categories;
+      facilities = res.facilities;
+      goSearch();
+    })
+    .catch(()=>{
+      showLoading(false);
+      document.getElementById('passcode-error').textContent = "通信エラーが発生しました";
+      pinInput = ""; renderPasscodeDots();
+    });
+}
+function showChangePasscode(){
+  const cur = prompt("現在のパスコード(4桁)を入力してください");
+  if(cur === null) return;
+  const next = prompt("新しいパスコード(4桁)を入力してください");
+  if(next === null) return;
+  if(!/^[0-9]{4}$/.test(next)){ alert("4桁の数字で入力してください"); return; }
+  showLoading(true);
+  fetch(APPS_SCRIPT_URL, {
+    method: "POST",
+    headers: {"Content-Type":"text/plain;charset=utf-8"},
+    body: JSON.stringify({passcode: cur, action:"changePasscode", newPasscode: next})
+  }).then(r=>r.json()).then(res=>{
+    showLoading(false);
+    if(res.ok){ alert("パスコードを変更しました"); }
+    else { alert("現在のパスコードが違います"); }
+  }).catch(()=>{ showLoading(false); alert("通信エラーが発生しました"); });
+}
+
+// ==== 検索画面 ====
+function goSearch(){
+  showScreen('screen-search');
+  document.getElementById('search-input').value = "";
+  document.getElementById('search-results').innerHTML = "";
+  renderCategoryGroups();
+}
+function onSearchInput(){
+  const q = document.getElementById('search-input').value.trim();
+  const wrap = document.getElementById('search-results');
+  wrap.innerHTML = "";
+  if(!q){ return; }
+  const hits = facilities.filter(f => f.name.includes(q));
+  hits.forEach(f => wrap.appendChild(makeResultItem(f)));
+  if(hits.length === 0){
+    wrap.innerHTML = '<div class="muted center" style="padding:16px 0;">該当する施設が見つかりません</div>';
+  }
+}
+function makeResultItem(f){
+  const div = document.createElement('div');
+  div.className = "result-item";
+  div.innerHTML = `<div class="name">${escapeHtml(f.name)}</div><div class="cat">${escapeHtml(f.category)}</div>`;
+  div.onclick = ()=> openDetail(f.id);
+  return div;
+}
+function renderCategoryGroups(){
+  const wrap = document.getElementById('category-groups');
+  wrap.innerHTML = "";
+  ["在宅","施設"].forEach(group=>{
+    const label = document.createElement('div');
+    label.className = "group-label";
+    label.textContent = group;
+    wrap.appendChild(label);
+    const grid = document.createElement('div');
+    grid.className = "btn-grid";
+    categories.filter(c=>c.group === group).forEach(c=>{
+      const chip = document.createElement('div');
+      chip.className = "chip " + (group === "在宅" ? "home" : "facility");
+      chip.innerHTML = escapeHtml(c.shortName).replace(/\n/g,"<br>");
+      chip.onclick = ()=> openCategoryList(c.fullName);
+      grid.appendChild(chip);
+    });
+    wrap.appendChild(grid);
+  });
+}
+
+// ==== 区分別一覧 ====
+function openCategoryList(fullName){
+  const hits = facilities.filter(f=>f.category === fullName);
+  if(hits.length === 0){
+    // 該当施設が0件の区分は、一覧を出さず区分自体の状況ページに直接遷移する
+    openCategoryOnlyDetail(fullName);
+    return;
+  }
+  currentCategory = fullName;
+  document.getElementById('category-list-title').textContent = fullName;
+  const wrap = document.getElementById('category-list-results');
+  wrap.innerHTML = "";
+  hits.forEach(f=>{
+    const div = document.createElement('div');
+    div.className = "result-item";
+    div.innerHTML = `<div class="name">${escapeHtml(f.name)}</div>`;
+    div.onclick = ()=> openDetail(f.id);
+    wrap.appendChild(div);
+  });
+  showScreen('screen-category-list');
+}
+
+// 施設名を持たない区分（在宅サービス利用なし/ありなど）専用の状況ページ
+function openCategoryOnlyDetail(fullName){
+  currentFacilityId = null;
+  const cat = categories.find(c=>c.fullName === fullName) || {};
+  document.getElementById('detail-title').innerHTML = `${escapeHtml(cat.fullName || "")}です`;
+
+  const statusEl = document.getElementById('detail-status');
+  const status = cat.status || "";
+  statusEl.textContent = status;
+  if(/^[0-9]+$/.test(status)){
+    statusEl.style.fontSize = "44px";
+  } else if(status.length > 10){
+    statusEl.style.fontSize = "16px";
+  } else {
+    statusEl.style.fontSize = "22px";
+  }
+
+  document.getElementById('detail-service').textContent = cat.service || "";
+
+  const fillinWrap = document.getElementById('detail-fillin-wrap');
+  if(cat.fillIn && cat.fillIn.trim() !== ""){
+    fillinWrap.style.display = "";
+    document.getElementById('detail-fillin').innerHTML = renderFillIn(cat.fillIn);
+  } else {
+    fillinWrap.style.display = "none";
+  }
+
+  document.getElementById('detail-memo-wrap').style.display = "none";
+  document.getElementById('detail-edit-btn').style.display = "none";
+  showScreen('screen-detail');
+}
+
+// ==== 施設詳細 ====
+function openDetail(id){
+  currentFacilityId = id;
+  const f = facilities.find(x=>x.id === id);
+  if(!f) return;
+  const cat = categories.find(c=>c.fullName === f.category) || {};
+  document.getElementById('detail-title').textContent = `${f.name}は\n${cat.fullName || ""}です`;
+  document.getElementById('detail-title').innerHTML = `${escapeHtml(f.name)}は<br>${escapeHtml(cat.fullName||"")}です`;
+
+  const statusEl = document.getElementById('detail-status');
+  const status = cat.status || "";
+  statusEl.textContent = status;
+  if(/^[0-9]+$/.test(status)){
+    statusEl.style.fontSize = "44px";
+  } else if(status.length > 10){
+    statusEl.style.fontSize = "16px";
+  } else {
+    statusEl.style.fontSize = "22px";
+  }
+
+  document.getElementById('detail-service').textContent = cat.service || "";
+
+  const fillinWrap = document.getElementById('detail-fillin-wrap');
+  if(cat.fillIn && cat.fillIn.trim() !== ""){
+    fillinWrap.style.display = "";
+    document.getElementById('detail-fillin').innerHTML = renderFillIn(cat.fillIn);
+  } else {
+    fillinWrap.style.display = "none";
+  }
+
+  const memoWrap = document.getElementById('detail-memo-wrap');
+  if(f.memo && f.memo.trim() !== ""){
+    memoWrap.style.display = "";
+    document.getElementById('detail-memo').textContent = f.memo;
+  } else {
+    memoWrap.style.display = "none";
+  }
+  document.getElementById('detail-edit-btn').style.display = "";
+
+  showScreen('screen-detail');
+}
+// ##で囲まれた部分を赤字にする
+function renderFillIn(text){
+  const escaped = escapeHtml(text);
+  return escaped.replace(/##(.+?)##/g, '<span class="em">$1</span>').replace(/\n/g,"<br>");
+}
+
+// ==== 追加・編集フォーム ====
+function goAdd(){
+  editingId = null;
+  document.getElementById('form-title').textContent = "施設を追加";
+  document.getElementById('form-name').value = "";
+  document.getElementById('form-memo').value = "";
+  fillCategorySelect();
+  document.getElementById('form-error').textContent = "";
+  showScreen('screen-form');
+}
+function goEdit(){
+  const f = facilities.find(x=>x.id === currentFacilityId);
+  if(!f) return;
+  editingId = f.id;
+  document.getElementById('form-title').textContent = "施設を編集";
+  document.getElementById('form-name').value = f.name;
+  document.getElementById('form-memo').value = f.memo || "";
+  fillCategorySelect(f.category);
+  document.getElementById('form-error').textContent = "";
+  showScreen('screen-form');
+}
+function fillCategorySelect(selected){
+  const sel = document.getElementById('form-category');
+  sel.innerHTML = "";
+  categories.forEach(c=>{
+    const opt = document.createElement('option');
+    opt.value = c.fullName;
+    opt.textContent = c.fullName;
+    if(c.fullName === selected) opt.selected = true;
+    sel.appendChild(opt);
+  });
+}
+function saveForm(){
+  const name = document.getElementById('form-name').value.trim();
+  const category = document.getElementById('form-category').value;
+  const memo = document.getElementById('form-memo').value.trim();
+  if(!name){
+    document.getElementById('form-error').textContent = "施設名を入力してください";
+    return;
+  }
+  const payload = { passcode: PASSCODE, facility: { id: editingId, name, category, memo } };
+  payload.action = editingId ? "update" : "add";
+  showLoading(true);
+  fetch(APPS_SCRIPT_URL, {
+    method: "POST",
+    headers: {"Content-Type":"text/plain;charset=utf-8"},
+    body: JSON.stringify(payload)
+  }).then(r=>r.json()).then(res=>{
+    showLoading(false);
+    if(!res.ok){
+      document.getElementById('form-error').textContent = "保存に失敗しました";
+      return;
+    }
+    if(editingId){
+      const f = facilities.find(x=>x.id === editingId);
+      f.name = name; f.category = category; f.memo = memo;
+    } else {
+      facilities.push({ id: res.id, name, category, memo, createdAt:"", updatedAt:"" });
+    }
+    goSearch();
+  }).catch(()=>{
+    showLoading(false);
+    document.getElementById('form-error').textContent = "通信エラーが発生しました";
+  });
+}
+
+function escapeHtml(s){
+  return String(s || "").replace(/[&<>"']/g, c=>({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  }[c]));
+}
+
+// 初期化
+renderPasscodeDots();
+renderPasscodeKeys();
+</script>
+</body>
+</html>
