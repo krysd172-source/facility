@@ -103,7 +103,7 @@
 <div class="screen" id="screen-search">
   <div class="topbar">
     <h1 style="margin:0;">施設区分検索</h1>
-    <button class="iconbtn" onclick="goAdd()" aria-label="施設を追加">＋</button>
+    <button class="iconbtn" onclick="pushNav({type:'search'}); goAdd()" aria-label="施設を追加">＋</button>
   </div>
   <div class="search-box">
     <span>🔍</span>
@@ -125,7 +125,7 @@
 <!-- 画面4: 施設詳細 -->
 <div class="screen" id="screen-detail">
   <div class="topbar">
-    <button class="iconbtn" onclick="history.back()" aria-label="戻る">←戻る</button>
+    <button class="iconbtn" onclick="goBack()" aria-label="戻る">←戻る</button>
   </div>
   <div class="card">
     <div id="detail-title" style="font-size:19px; font-weight:700; line-height:1.6;"></div>
@@ -143,14 +143,14 @@
       <div class="section-label">メモ</div>
       <div class="section-body" id="detail-memo"></div>
     </div>
-    <button class="btn-outline" id="detail-edit-btn" style="margin-top:18px;" onclick="goEdit()">✏️ 編集する</button>
+    <button class="btn-outline" id="detail-edit-btn" style="margin-top:18px;" onclick="pushNav({type:'detail', id: currentFacilityId}); goEdit()">✏️ 編集する</button>
   </div>
 </div>
 
 <!-- 画面5: 追加・編集フォーム -->
 <div class="screen" id="screen-form">
   <div class="topbar">
-    <button class="iconbtn" onclick="history.back()" aria-label="戻る">←戻る</button>
+    <button class="iconbtn" onclick="goBack()" aria-label="戻る">←戻る</button>
   </div>
   <h1 id="form-title">施設を追加</h1>
   <div class="card">
@@ -183,6 +183,17 @@ let facilities = [];
 let currentCategory = null;
 let currentFacilityId = null;
 let editingId = null;
+let navStack = []; // 戻るボタン用の画面遷移履歴
+
+function pushNav(view){ navStack.push(view); }
+function goBack(){
+  const prev = navStack.pop();
+  if(!prev){ goSearch(); return; }
+  if(prev.type === 'search'){ goSearch(); }
+  else if(prev.type === 'categoryList'){ openCategoryList(prev.category); }
+  else if(prev.type === 'detail'){ openDetail(prev.id); }
+  else { goSearch(); }
+}
 
 function showLoading(v){ document.getElementById('loading').classList.toggle('hidden', !v); }
 function showScreen(id){
@@ -264,6 +275,7 @@ function showChangePasscode(){
 
 // ==== 検索画面 ====
 function goSearch(){
+  navStack = [];
   showScreen('screen-search');
   document.getElementById('search-input').value = "";
   document.getElementById('search-results').innerHTML = "";
@@ -284,7 +296,7 @@ function makeResultItem(f){
   const div = document.createElement('div');
   div.className = "result-item";
   div.innerHTML = `<div class="name">${escapeHtml(f.name)}</div><div class="cat">${escapeHtml(f.category)}</div>`;
-  div.onclick = ()=> openDetail(f.id);
+  div.onclick = ()=> { pushNav({type:'search'}); openDetail(f.id); };
   return div;
 }
 function renderCategoryGroups(){
@@ -301,7 +313,7 @@ function renderCategoryGroups(){
       const chip = document.createElement('div');
       chip.className = "chip " + (group === "在宅" ? "home" : "facility");
       chip.innerHTML = escapeHtml(c.shortName).replace(/\n/g,"<br>");
-      chip.onclick = ()=> openCategoryList(c.fullName);
+      chip.onclick = ()=> { pushNav({type:'search'}); openCategoryList(c.fullName); };
       grid.appendChild(chip);
     });
     wrap.appendChild(grid);
@@ -324,7 +336,7 @@ function openCategoryList(fullName){
     const div = document.createElement('div');
     div.className = "result-item";
     div.innerHTML = `<div class="name">${escapeHtml(f.name)}</div>`;
-    div.onclick = ()=> openDetail(f.id);
+    div.onclick = ()=> { pushNav({type:'categoryList', category: fullName}); openDetail(f.id); };
     wrap.appendChild(div);
   });
   showScreen('screen-category-list');
