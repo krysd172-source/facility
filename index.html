@@ -127,6 +127,7 @@
 <div class="screen" id="screen-detail">
   <div class="topbar">
     <button class="iconbtn" onclick="goBack()" aria-label="戻る">←戻る</button>
+    <button class="iconbtn" id="detail-delete-btn" onclick="deleteFacility()" aria-label="施設を削除">🗑️</button>
   </div>
   <div class="card">
     <div id="detail-title" style="font-size:19px; font-weight:700; line-height:1.6;"></div>
@@ -238,7 +239,7 @@ function onKeyPress(k){
   if(pinInput.length === 4){ submitPasscode(); }
 }
 function submitPasscode(){
-  showLoading(true, "読み込み中…\n（しばらく操作がなかった直後や、データ更新の直後は時間がかかることがあります）");
+  showLoading(true, "読み込み中…\n（しばらく操作がなかった時や、データ更新の直後は時間がかかることがあります）");
   fetch(APPS_SCRIPT_URL + "?passcode=" + encodeURIComponent(pinInput))
     .then(r=>r.json())
     .then(res=>{
@@ -376,6 +377,7 @@ function openCategoryOnlyDetail(fullName){
 
   document.getElementById('detail-memo-wrap').style.display = "none";
   document.getElementById('detail-edit-btn').style.display = "none";
+  document.getElementById('detail-delete-btn').style.display = "none";
   showScreen('screen-detail');
 }
 
@@ -417,6 +419,7 @@ function openDetail(id){
     memoWrap.style.display = "none";
   }
   document.getElementById('detail-edit-btn').style.display = "";
+  document.getElementById('detail-delete-btn').style.display = "";
 
   showScreen('screen-detail');
 }
@@ -446,6 +449,26 @@ function goEdit(){
   fillCategorySelect(f.category);
   document.getElementById('form-error').textContent = "";
   showScreen('screen-form');
+}
+function deleteFacility(){
+  const f = facilities.find(x=>x.id === currentFacilityId);
+  if(!f) return;
+  const sure = confirm(`「${f.name}」（${f.category}）を削除します。\nこの操作は取り消せません。よろしいですか？`);
+  if(!sure) return;
+  showLoading(true, "削除しています…");
+  fetch(APPS_SCRIPT_URL, {
+    method: "POST",
+    headers: {"Content-Type":"text/plain;charset=utf-8"},
+    body: JSON.stringify({ passcode: PASSCODE, action:"delete", facility: { id: f.id } })
+  }).then(r=>r.json()).then(res=>{
+    showLoading(false);
+    if(!res.ok){ alert("削除に失敗しました"); return; }
+    facilities = facilities.filter(x=>x.id !== f.id);
+    goSearch();
+  }).catch(()=>{
+    showLoading(false);
+    alert("通信エラーが発生しました");
+  });
 }
 function fillCategorySelect(selected){
   const sel = document.getElementById('form-category');
