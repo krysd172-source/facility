@@ -192,9 +192,16 @@ function goBack(){
   const prev = navStack.pop();
   if(!prev){ goSearch(); return; }
   if(prev.type === 'search'){ goSearch(); }
+  else if(prev.type === 'searchResult'){ restoreSearchResults(prev.query); }
   else if(prev.type === 'categoryList'){ openCategoryList(prev.category); }
   else if(prev.type === 'detail'){ openDetail(prev.id); }
   else { goSearch(); }
+}
+function restoreSearchResults(query){
+  showScreen('screen-search');
+  document.getElementById('search-input').value = query;
+  renderCategoryGroups();
+  onSearchInput();
 }
 
 function showLoading(v, msg){
@@ -302,7 +309,7 @@ function makeResultItem(f){
   const div = document.createElement('div');
   div.className = "result-item";
   div.innerHTML = `<div class="name">${escapeHtml(f.name)}</div><div class="cat">${escapeHtml(f.category)}</div>`;
-  div.onclick = ()=> { pushNav({type:'search'}); openDetail(f.id); };
+  div.onclick = ()=> { pushNav({type:'searchResult', query: document.getElementById('search-input').value}); openDetail(f.id); };
   return div;
 }
 function renderCategoryGroups(){
